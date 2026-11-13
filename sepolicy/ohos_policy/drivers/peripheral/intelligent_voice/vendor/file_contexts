@@ -12,3 +12,6 @@
 # limitations under the License.
 
 /dev/soundtrigger        u:object_r:dev_soundtrigger:s0
+
+/vendor/etc/intelligent_voice/cpu(/.*)?    u:object_r:qemu_voice_models_file:s0
+/data/service/el0/intelligent_voice/wakeup/cpu(/.*)?    u:object_r:qemu_voice_cpu_data:s0

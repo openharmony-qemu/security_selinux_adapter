@@ -1,6 +1,8 @@
 {
     "user": {
         "sadomain": [
+            "fusion_ranging",
+            "partner_device_agent",
             "sdc",
             "work_scheduler_service",
             "asset_service",

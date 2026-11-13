@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# Domain/entrypoint defaults come from sadomain, not a privileged alias.
+allow fusion_ranging sa_fusion_ranging_service:samgr_class { add get };
+allow partner_device_agent sa_partner_device_agent_service:samgr_class { add get };

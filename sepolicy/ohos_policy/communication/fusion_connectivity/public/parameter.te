@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# Internal lifecycle flag owned by PartnerDeviceAgent, not all persist.* keys.
+type fusion_partner_enable_param, parameter_attr, system_parameter_attr, system_internal_parameter_attr;

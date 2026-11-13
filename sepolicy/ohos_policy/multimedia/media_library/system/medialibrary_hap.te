@@ -34,6 +34,9 @@ allow medialibrary_hap camera_service:fd { use };
 
 # avc:  denied  { get } for service=usbfn_mtp_interface_service sid=u:r:medialibrary_hap:s0 scontext=u:r:medialibrary_hap:s0 tcontext=u:object_r:hdf_usbfn_mtp_interface_service:s0 tclass=hdf_devmgr_class permissive=0
 allow medialibrary_hap hdf_usbfn_mtp_interface_service:hdf_devmgr_class { get };
+# The normal service observes only mount readiness. HDI alone opens endpoints.
+allow medialibrary_hap dev_usb_ffs:dir { search getattr };
+allow medialibrary_hap qemu_usb_functionfs:dir { search getattr };
 
 # avc: denied { read write } for pid=3641, comm="/system/bin/appspawn" path="/dev/fuse" dev="" ino=15 scontext=u:r:medialibrary_hap:s0 tcontext=u:object_r:dev_fuse_file:s0 tclass=chr_file permissive=1
 allow medialibrary_hap dev_fuse_file:chr_file { read write };

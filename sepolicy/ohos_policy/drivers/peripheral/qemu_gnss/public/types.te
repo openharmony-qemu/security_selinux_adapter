@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+type qemu_gnss_input_dir, dev_attr, file_attr;
+type qemu_gnss_input_socket, dev_attr, file_attr, system_sock_domain;

@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: Apache-2.0
+persist.fusion_connectivity.enable_partner_agent u:object_r:fusion_partner_enable_param:s0

@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# The service owns this flag; init loads its default and SAMGR reads it for
+# on-demand service lifetime. Keep application and other service writes denied.
+allow partner_device_agent fusion_partner_enable_param:parameter_service { set };
+allow init fusion_partner_enable_param:parameter_service { set };
+allow { partner_device_agent samgr init } fusion_partner_enable_param:file { map open read };

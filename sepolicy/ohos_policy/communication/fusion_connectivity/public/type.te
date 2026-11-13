@@ -14,3 +14,6 @@
 type fusion_host, hdfdomain, domain;
 typeattribute fusion_host violator_vendor_system_etc_read;
 
+# Keep the services in the dedicated identities already declared by init.
+type fusion_ranging, sadomain, domain;
+type partner_device_agent, sadomain, domain;

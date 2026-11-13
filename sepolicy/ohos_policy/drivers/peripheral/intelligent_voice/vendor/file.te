@@ -13,3 +13,7 @@
 
 type dev_soundtrigger, dev_attr;
 type dev_hifi_misc, dev_attr;
+
+# QEMU CPU provider: immutable model data and private native enrollment.
+type qemu_voice_models_file, file_attr, vendor_file_attr, vendor_etc_file_attr;
+type qemu_voice_cpu_data, file_attr, data_file_attr, data_service_file_attr;

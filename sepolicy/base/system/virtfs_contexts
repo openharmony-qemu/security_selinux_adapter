@@ -113,6 +113,7 @@ genfscon tracefs / u:object_r:tracefs:s0
 
 genfscon configfs / u:object_r:configfs:s0
 genfscon configfs /usb_gadget  u:object_r:config_usb_gadget:s0
+genfscon configfs /usb_gadget/qemu_shared u:object_r:qemu_usb_configfs:s0
 
 genfscon cgroup / u:object_r:cgroup:s0
 genfscon functionfs / u:object_r:functionfs:s0

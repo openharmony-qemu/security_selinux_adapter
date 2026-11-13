@@ -13,3 +13,6 @@
 
 # Filesystem types
 type dev_usb_accessory_file, dev_attr;
+# Independent normal QEMU UDC config and its two FunctionFS mounts.
+type qemu_usb_configfs, fs_attr;
+type qemu_usb_functionfs, fs_attr;

@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+/dev/unix/socket/qemu_sensor          u:object_r:qemu_sensor_input_dir:s0
+/dev/unix/socket/qemu_sensor/input    u:object_r:qemu_sensor_input_socket:s0
+/dev/unix/socket/qemu_sensor/rotation u:object_r:qemu_sensor_input_socket:s0
+/dev/unix/socket/qemu_sensor/headposture u:object_r:qemu_sensor_input_socket:s0

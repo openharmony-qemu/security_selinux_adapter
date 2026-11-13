@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+# Separate registration objects; neither service may publish the other's SA.
+type sa_fusion_ranging_service, sa_service_attr;
+type sa_partner_device_agent_service, sa_service_attr;

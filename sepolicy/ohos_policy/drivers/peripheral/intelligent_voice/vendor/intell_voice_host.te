@@ -131,3 +131,18 @@ allowxperm intell_voice_host data_chipset_el1_file:file ioctl { 0x5413 };
 # avc: denied { unlink } for pid=9043, comm="/vendor/bin/hdf_devhost"  name="/chipset/el1/public/intellvoice/wakeup/vpr/vpr/enroll/tmp/pcm/19700809173132546377.pcm" dev="/dev/block/platform/ee560000.ufs/by-name/userdata" ino=32531 scontext=u:r:intell_voice_host:s0 tcontext=u:object_r:data_chipset_el1_file:s0 tclass=file permissive=1
 # avc: denied { write } for pid=9043, comm="/vendor/bin/hdf_devhost"  path="/data/chipset/el1/public/intellvoice/wakeup/vpr/vpr/vpr_history_info.dat" dev="/dev/block/platform/ee560000.ufs/by-name/userdata" ino=32639 scontext=u:r:intell_voice_host:s0 tcontext=u:object_r:data_chipset_el1_file:s0 tclass=file permissive=1
 allow intell_voice_host data_chipset_el1_file:file { append create getattr ioctl map open read rename unlink write };
+
+# Fixed normal QEMU CPU provider paths. No ordinary HAP receives these rights.
+allow intell_voice_host qemu_voice_models_file:dir { search getattr open read };
+allow intell_voice_host qemu_voice_models_file:file { getattr open read map };
+allow intell_voice_host qemu_voice_cpu_data:dir { create getattr open read search write add_name remove_name };
+allow intell_voice_host qemu_voice_cpu_data:file { create getattr open read write append lock rename unlink };
+# Normal vendor imported C API/ORT/SDK runtime use only installed native DSOs.
+allow intell_voice_host vendor_lib_file:dir { search getattr open read };
+allow intell_voice_host vendor_lib_file:file { getattr open read execute map };
+developer_only(`
+    allow sh qemu_voice_cpu_data:dir { search getattr open read write add_name remove_name };
+    allow sh qemu_voice_cpu_data:file { getattr open read write create append lock rename unlink setattr };
+    allow sh qemu_voice_models_file:dir { search getattr open read };
+    allow sh qemu_voice_models_file:file { getattr open read };
+')

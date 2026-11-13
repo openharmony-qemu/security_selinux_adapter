@@ -245,3 +245,10 @@ allow audio_server data_data_hvs_dir:dir { search create write add_name };
 # avc: denied { getattr } for pid=831, comm="/system/bin/sa_main"  path="/data/data/hvs/arm/personalized_hrtf.bin" dev="/dev/block/platform/ee560000.ufs/by-name/userdata" ino=36358 scontext=u:r:audio_server:s0 tcontext=u:object_r:data_data_hvs_dir:s0 tclass=file permissive=1
 # avc: denied { read } for pid=831, comm="/system/bin/sa_main"  path="/data/data/hvs/arm/personalized_hrtf.bin" dev="/dev/block/platform/ee560000.ufs/by-name/userdata" ino=36358 scontext=u:r:audio_server:s0 tcontext=u:object_r:data_data_hvs_dir:s0 tclass=file permissive=1
 allow audio_server data_data_hvs_dir:file { open write create getattr read };
+
+allow audio_server qemu_spatial_trace_file:dir { search getattr open read write add_name remove_name };
+allow audio_server qemu_spatial_trace_file:file { create getattr open write append read unlink };
+developer_only(`
+    allow sh qemu_spatial_trace_file:dir { search getattr open read write add_name remove_name };
+    allow sh qemu_spatial_trace_file:file { getattr open read write create append unlink setattr };
+')

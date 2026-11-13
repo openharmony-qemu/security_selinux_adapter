@@ -15,3 +15,6 @@
 # avc:  denied  { rlimitinh } for  pid=1256 comm="hdf_devhost" scontext=u:r:init:s0 tcontext=u:r:intell_voice_host:s0 tclass=process permissive=0
 # avc:  denied  { siginh } for  pid=1256 comm="hdf_devhost" scontext=u:r:init:s0 tcontext=u:r:intell_voice_host:s0 tclass=process permissive=0
 allow init intell_voice_host:process { transition rlimitinh siginh };
+
+allow init qemu_voice_cpu_data:dir { create getattr open read search write add_name remove_name relabelfrom relabelto setattr };
+allow init qemu_voice_cpu_data:file { getattr relabelfrom relabelto setattr };

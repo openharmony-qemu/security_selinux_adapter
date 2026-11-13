@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+type_transition init dev_unix_socket:dir qemu_gnss_input_dir "qemu_gnss";
+type_transition location_host qemu_gnss_input_dir:sock_file qemu_gnss_input_socket "input";
+allow init qemu_gnss_input_dir:dir { create getattr setattr search relabelto };
+allow location_host qemu_gnss_input_dir:dir { getattr search write add_name remove_name };
+allow location_host qemu_gnss_input_socket:sock_file { create getattr setattr write unlink };
+allow location_host self:unix_stream_socket { create bind listen accept read write getattr getopt setopt shutdown connect connectto };
+allow location_host dev_random_file:chr_file { getattr open read };
+# Debug HDC writer additionally authenticates real UID zero in the provider.
+debug_only(`
+    allow su dev_unix_socket:dir search;
+    allow su qemu_gnss_input_dir:dir search;
+    allow su qemu_gnss_input_socket:sock_file { getattr write };
+    allow su location_host:unix_stream_socket connectto;
+')

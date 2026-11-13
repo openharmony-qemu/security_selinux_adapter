@@ -79,6 +79,12 @@ allow usb_host dev_bus_usb_file:chr_file { ioctl map open read write getattr};
 allow usb_host dev_bus_usb_file:dir { search };
 allow usb_host dev_functionfs_file:chr_file { ioctl map open read write getattr };
 allow usb_host dev_functionfs_file:dir { search };
+# Standard upstream FunctionFS used by the QEMU UDC, independent of UsbFn epfs.
+# No ordinary application receives gadget endpoint access.
+allow usb_host dev_usb_ffs:dir { search getattr };
+allow usb_host qemu_usb_functionfs:dir { search getattr open read };
+allow usb_host qemu_usb_functionfs:file { getattr open read write ioctl };
+allowxperm usb_host qemu_usb_functionfs:file ioctl { 0x6701 0x6702 0x6703 0x6782 };
 allow usb_host dev_hdf_kevent:chr_file { getattr ioctl open read write };
 allow usb_host dev_hdf_usb_pnp:chr_file { getattr ioctl open read write };
 allow usb_host dev_usbfn_file:chr_file { getattr ioctl read write open map };
@@ -148,3 +154,17 @@ allow usb_host sys_file:file { open read write };
 allow usb_host sys_file:dir { open read search };
 allow usb_host hdf_usb_device_interface_service:hdf_devmgr_class { add };
 allow usb_host hdf_usb_port_interface_service:hdf_devmgr_class { add };
+
+# The existing HDC policy transitions hdcd + sh_exec to sh only under
+# developer_only. Existing sh data_local_tmp execute_no_trans preserves sh.
+# Runtime records the actual shell and peer attr/current; UID 0 is not a domain.
+# No additional su transition, application gadget access or enforcement change.
+developer_only(`
+    allow sh qemu_usb_configfs:dir { search getattr open read write add_name remove_name };
+    allow sh qemu_usb_configfs:file { getattr open read write };
+    allow sh qemu_usb_configfs:lnk_file { getattr read create unlink };
+    allow sh dev_usb_ffs:dir { search getattr };
+    allow sh qemu_usb_functionfs:dir { search getattr open read };
+    allow sh qemu_usb_functionfs:file { getattr open read write ioctl };
+    allowxperm sh qemu_usb_functionfs:file ioctl { 0x6701 0x6702 0x6703 0x6782 };
+')
